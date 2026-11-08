@@ -65,7 +65,8 @@ ENV NODE_ENV=production
 # Install dependensi Node.js
 # =============================================================================
 COPY package.json package-lock.json ./
-RUN npm ci --omit=dev --no-audit --no-fund
+RUN npm config set engine-strict false && \
+    npm install --omit=dev --no-audit --no-fund --ignore-engines
 
 # =============================================================================
 # Salin seluruh source proyek (termasuk folder sessions yang sudah terpairing)
