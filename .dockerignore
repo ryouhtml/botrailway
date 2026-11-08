@@ -1,0 +1,25 @@
+# Jangan di-include ke image Docker (dibuat ulang saat runtime / tidak perlu)
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+yarn-debug.log*
+yarn-error.log*
+npm-debug.log*
+.bot.log
+bot.log
+.env
+.env.local
+.env.*.local
+.env.example
+.DS_Store
+Thumbs.db
+
+# Folder runtime (dihasilkan ulang ketika bot berjalan)
+output
+temp
+media
+
+# Version control (tidak ada .git di proyek ini, jaga-jaga)
+.git
+.gitignore

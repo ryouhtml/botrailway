@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Logs
+bot.log
+*.log
+npm-debug.log*
+
+# Runtime / generated
+output/
+temp/
+media/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Zip archives
+*.zip

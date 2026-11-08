@@ -1,0 +1,12 @@
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/"
+healthcheckTimeout = 300
+healthcheckInterval = 30
+healthcheckTimeoutFailureThreshold = 3
+
+[deploy.resources]
+# FURINA V18 cukup berat (puppeteer + sharp + canvas + tfjs-node).
+# Direkomosikan: minimal 1 GB RAM. Gunakan tipe layanan "service" (worker),
+# bukan web, karena bot ini tidak buka port HTTP.
+# Memory default disesuaikan di dashboard Railway > Service > Settings.
