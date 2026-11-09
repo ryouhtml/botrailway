@@ -14,6 +14,10 @@ if (!baileys.makeInMemoryStore) {
 			messages: {},
 			contacts: {},
 			...opts,
+			bind: (ev) => {
+				// store.bind adalah no-op untuk fallback
+				return ev;
+			},
 		};
 		return store;
 	};
