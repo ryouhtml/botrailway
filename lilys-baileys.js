@@ -6,4 +6,17 @@ try {
 } catch (e) {
 	baileys = require('@whiskeysockets/baileys');
 }
+
+// Fallback makeInMemoryStore jika tidak tersedia (khusus @whiskeysockets/baileys)
+if (!baileys.makeInMemoryStore) {
+	baileys.makeInMemoryStore = (opts = {}) => {
+		const store = {
+			messages: {},
+			contacts: {},
+			...opts,
+		};
+		return store;
+	};
+}
+
 module.exports = baileys;
