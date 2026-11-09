@@ -2,7 +2,7 @@ module.exports = {
 modul: {
 	axios: require('axios'),
 	boom: require('@hapi/boom'),
-	baileys: require("lilys-baileys"),
+	baileys: require("@whiskeysockets/baileys"),
 	chalk: require('chalk'),
 	crypto: require('crypto'),
 	cheerio: require('cheerio'),
