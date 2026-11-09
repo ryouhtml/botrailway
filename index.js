@@ -83,7 +83,11 @@ const owner = JSON.parse(fs.readFileSync('./database/owner.json'))
 const store = (makeInMemoryStore || (() => ({})))({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
 
-const question = (text) => new Promise((resolve) => rl.question(text, resolve))
+const question = (text) => {
+    // Di Railway (non-TTY) tidak ada stdin interaktif, jangan panggil rl.question
+    if (!process.stdin.isTTY) return Promise.resolve(phoneNumber)
+    return new Promise((resolve) => rl.question(text, resolve))
+}
 
 // ===== LOG TEE =====
 // Semua output (stdout + stderr) ditulis ke BOTH terminal dan bot.log secara
@@ -233,11 +237,15 @@ markOnlineOnConnect: true,
     }
     // =================================================
 if (!Furina.authState.creds.registered) {
-const phoneNumber = await question('Masukin nomor yang mau dijadikan bot.. contoh: 6283166570663\n');
-const pairingFurina = "LILYBAIL";
-let code = await Furina.requestPairingCode(phoneNumber, pairingFurina);
-code = code?.match(/.{1,4}/g)?.join("-") || code;
-console.log(`Ini kodenya:`, code);
+    if (!process.stdin.isTTY) {
+        console.log('Sesi WhatsApp belum terdaftar. Di Railway tidak ada input interaktif untuk pairing. Pastikan folder sessions sudah valid dan terpairing.')
+    } else {
+        const phoneNumber = await question('Masukin nomor yang mau dijadikan bot.. contoh: 6283166570663\n');
+        const pairingFurina = "LILYBAIL";
+        let code = await Furina.requestPairingCode(phoneNumber, pairingFurina);
+        code = code?.match(/.{1,4}/g)?.join("-") || code;
+        console.log(`Ini kodenya:`, code);
+    }
 }
     store.bind(Furina.ev)
 
