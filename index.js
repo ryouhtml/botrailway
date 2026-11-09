@@ -247,7 +247,7 @@ if (!Furina.authState.creds.registered) {
         console.log(`Ini kodenya:`, code);
     }
 }
-    store.bind(Furina.ev)
+    store.bind?.(Furina.ev)
 
 Furina.ev.on('connection.update', async (update) => {
 	const {

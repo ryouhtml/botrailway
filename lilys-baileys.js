@@ -7,20 +7,12 @@ try {
 	baileys = require('@whiskeysockets/baileys');
 }
 
-// Fallback makeInMemoryStore jika tidak tersedia (khusus @whiskeysockets/baileys)
-if (!baileys.makeInMemoryStore) {
-	baileys.makeInMemoryStore = (opts = {}) => {
-		const store = {
-			messages: {},
-			contacts: {},
-			...opts,
-			bind: (ev) => {
-				// store.bind adalah no-op untuk fallback
-				return ev;
-			},
-		};
-		return store;
-	};
-}
+// Pastikan makeInMemoryStore selalu ada dan mengembalikan store dengan method bind
+const _origMakeInMemoryStore = baileys.makeInMemoryStore;
+baileys.makeInMemoryStore = (opts = {}) => {
+	const store = _origMakeInMemoryStore ? _origMakeInMemoryStore(opts) : { messages: {}, contacts: {}, ...opts };
+	if (!store.bind) store.bind = (ev) => ev;
+	return store;
+};
 
 module.exports = baileys;
