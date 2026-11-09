@@ -80,7 +80,7 @@ const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
 const useMobile = process.argv.includes("--mobile")
 const owner = JSON.parse(fs.readFileSync('./database/owner.json'))
 
-const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
+const store = (makeInMemoryStore || (() => ({})))({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
 
 const question = (text) => new Promise((resolve) => rl.question(text, resolve))
