@@ -75,6 +75,10 @@ RUN npm config set engine-strict false && \
 # =============================================================================
 COPY . .
 
+# Buat symlink lilys-baileys.js di node_modules agar require('lilys-baileys')
+# tetap working di semua file yang masih menggunakan alias lama
+RUN ln -sf /app/lilys-baileys.js node_modules/lilys-baileys.js
+
 # =============================================================================
 # Jalankan bot
 # =============================================================================
