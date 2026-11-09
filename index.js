@@ -439,7 +439,8 @@ name: 'WhatsApp'
 } : id === Furina.decodeJid(Furina.user.id) ?
 Furina.user :
 (store.contacts[id] || {})
-return (withoutContact ? '' : v.name) || v.subject || v.verifiedName || PhoneNumber('+' + jid.replace('@s.whatsapp.net', '')).getNumber('international')
+const _pn = PhoneNumber('+' + jid.replace('@s.whatsapp.net', ''))
+return (withoutContact ? '' : v.name) || v.subject || v.verifiedName || (_pn ? _pn.getNumber('international') : jid)
 }
 
 Furina.parseMention = (text = '') => {
