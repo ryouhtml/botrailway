@@ -25,7 +25,7 @@ const {
     makeCacheableSignalKeyStore,
     getAggregateVotesInPollMessage,
     proto
-} = require("@whiskeysockets/baileys")
+} = require("lilys-baileys")
 const crypto = require('crypto')
 const cfonts = require('cfonts');
 const { color, bgcolor } = require('./lib/color')

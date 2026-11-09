@@ -1,3 +1,3 @@
-// Shim: lilys-baileys adalah alias paket @whiskeysockets/baileys (Baileys resmi).
+// Shim: lilys-baileys adalah alias paket cantarella-baileys (fork Baileys kompatibel).
 // File ini memungkinkan require('lilys-baileys') tetap bekerja di Railway.
-module.exports = require('@whiskeysockets/baileys');
+module.exports = require('cantarella-baileys');
