@@ -58,15 +58,16 @@ ENV PORT=3000
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
-# Hapus notifikasi funding/npm audit selama install
-ENV NODE_ENV=production
+# Tambah memory untuk proses npm install (native modules berat)
+ENV NODE_OPTIONS=--max-old-space-size=4096
 
 # =============================================================================
 # Install dependensi Node.js
 # =============================================================================
-COPY package.json package-lock.json ./
+COPY package.json ./
 RUN npm config set engine-strict false && \
-    npm install --omit=dev --no-audit --no-fund --ignore-engines
+    npm config set legacy-peer-deps true && \
+    npm install --no-audit --no-fund --ignore-engines
 
 # =============================================================================
 # Salin seluruh source proyek (termasuk folder sessions yang sudah terpairing)
