@@ -68,7 +68,7 @@ COPY package.json ./
 RUN npm config set engine-strict false && \
     npm config set legacy-peer-deps true && \
     npm install --no-audit --no-fund --ignore-engines && \
-    npm install cantarella-baileys --no-audit --no-fund --ignore-engines
+    npm install cantarella-baileys @whiskeysockets/baileys --no-audit --no-fund --ignore-engines
 
 # =============================================================================
 # Salin seluruh source proyek (termasuk folder sessions yang sudah terpairing)
